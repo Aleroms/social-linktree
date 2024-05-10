@@ -10,7 +10,7 @@
   --fm-c-i-grey: hsl(0, 0%, 80%);
   --fm-c-i-dark-grey: hsl(0, 0%, 88%);
   --fm-c-i-off-black: hsl(0, 0%, 92%);
-  --fm-c-i-green: hsl(255, 94, 43%);
+  --fm-c-i-green: hsl(255, 94%, 43%);
 }
 
 /* semantic color variables for this project */
@@ -21,8 +21,8 @@
 
   --color-heading: var(--fm-c-i-green);
   --color-text: var(--fm-c-i-white);
-
   --section-gap: 160px;
+  --border-radius: 10px;
 }
 
 @media (prefers-color-scheme: dark) {
