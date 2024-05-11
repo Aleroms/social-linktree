@@ -41,4 +41,9 @@ p {
   margin-top: 1rem;
   opacity: 0.7;
 }
+@media(min-width: 400px){
+  .sharable-link-container{
+    width: 400px;
+  }
+}
 </style>
