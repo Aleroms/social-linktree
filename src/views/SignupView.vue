@@ -1,20 +1,31 @@
 <template>
   <section class="login">
     <!-- temporary until add formkit -->
-    <form @submit="signUpUser" class="login-container">
-      <h1>Signup</h1>
-      <p>username</p>
-      <p>password</p>
-      <p>or</p>
-      <p>sign up with github</p>
-      <p>sign up with google</p>
-    </form>
+    <h1>Signup</h1>
+    <FormKit type="form" @submit="signUpUser" class="login-container">
+      <FormKit
+        type="text"
+        name="username"
+        id="name"
+        validation="required"
+        label="Name"
+        placeholder="username"
+      />
+      <FormKit
+        type="password"
+        name="password"
+        id="password"
+        validation="required"
+        label="Password"
+        placeholder="password"
+      />
+    </FormKit>
     <RouterLink to="/" class="goBackLink"> go back</RouterLink>
   </section>
 </template>
 
 <script setup lang="ts">
-function signUpUser(values) {
+function signUpUser(values: Object) {
   alert(values)
 }
 </script>

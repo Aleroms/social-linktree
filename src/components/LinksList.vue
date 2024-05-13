@@ -1,6 +1,6 @@
 <template>
   <div class="link-list-container">
-    <LinkButton v-for="link in linktree" :key="link.platform" :details="link"/>
+    <LinkButton v-for="link in props.linktree" :key="link.platform" :details="link" />
   </div>
 </template>
 
@@ -8,12 +8,16 @@
 import { defineProps } from 'vue'
 import LinkButton from '@/components/LinkButton.vue'
 
-defineProps({
-  linktree: {
-    type: Array,
-    required: true
-  }
-})
+interface Props {
+  linktree: [
+    {
+      platform: string
+      link: string
+    }
+  ]
+}
+
+const props = defineProps<Props>()
 </script>
 
 <style scoped></style>

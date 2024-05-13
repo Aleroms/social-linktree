@@ -14,8 +14,41 @@ a,
   border-radius: var(--border-radius);
 }
 
+h1 {
+  font-size: 25px;
+}
+.formkit-form {
+  padding: 1.625rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-background-soft);
+  border-radius: var(--border-radius);
+}
+
+.formkit-input {
+  background-color: var(--color-background-mute);
+  color: var(--color-text);
+  border: none;
+  padding: 0.425rem 0.825rem;
+  margin: 5px 0;
+  font-weight: 600;
+  border-radius: var(--border-radius);
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+.formkit-label {
+  font-weight: 600;
+}
+.formkit-wrapper {
+  margin: 0.625rem 0;
+  flex-direction: column;
+  gap: 8px;
+}
+
 @media (hover: hover) {
   a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);
   }
+  
 }

@@ -30,9 +30,6 @@ defineProps({
 img {
   border-radius: 50px;
 }
-h1 {
-  font-size: 25px;
-}
 h2 {
   font-size: 14px;
   color: var(--color-heading);
