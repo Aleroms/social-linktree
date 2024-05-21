@@ -118,4 +118,8 @@ const projectName = 'Social Linktree'
 const url = 'social-linktree.santiagomorales.dev'
 </script>
 
-<style scoped></style>
+<style scoped>
+.privacy-container {
+  margin-bottom: 1rem;
+}
+</style>

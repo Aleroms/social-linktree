@@ -6,12 +6,20 @@ export const useUserStore = defineStore('userStore', () => {
   const userLoggedIn = ref(false)
 
   function login(values: LoginValues) {
-    console.log(values.username, values.password)
+    //Todo: login user using aws cognito
+    alert(values.username + '\n' + values.password)
     userLoggedIn.value = true
   }
   function logout() {
+    // Todo: logout user using aws cognito
+    alert('logging out')
     userLoggedIn.value = false
   }
 
-  return { login, logout, userLoggedIn }
+  function register(values: LoginValues) {
+    // Todo: register user using aws dynamoDB or cognito
+    alert(values)
+  }
+
+  return { login, logout, userLoggedIn, register }
 })

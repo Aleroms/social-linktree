@@ -2,6 +2,7 @@
   <section class="login">
     <!-- temporary until add formkit -->
     <h1>Signup</h1>
+    <p v-if="signup_alert_display">{{ signup_alert_message }}</p>
     <FormKit type="form" @submit="signUpUser" class="login-container">
       <FormKit
         type="text"
@@ -18,15 +19,39 @@
         validation="required"
         label="Password"
         placeholder="password"
+        autocomplete="on"
       />
     </FormKit>
-    <RouterLink to="/" class="goBackLink"> go back</RouterLink>
+    <RouterLink to="/"> go back</RouterLink>
   </section>
 </template>
 
 <script setup lang="ts">
-function signUpUser(values: Object) {
-  alert(values)
+import { ref } from 'vue'
+import { useUserStore } from '@/stores/user'
+import { useRouter } from 'vue-router'
+import { type LoginValues } from '@/common/types'
+
+const userStore = useUserStore()
+const router = useRouter()
+
+const signup_alert_display = ref(false)
+const signup_alert_message = ref('Registering account...')
+const signup_in_submission = ref(false)
+
+function signUpUser(values: LoginValues) {
+  signup_alert_display.value = true
+  signup_in_submission.value = true
+
+  try {
+    userStore.register(values)
+  } catch (error) {
+    console.log(error)
+    return
+  }
+
+  signup_alert_message.value = 'Success'
+  router.push('/profile')
 }
 </script>
 
@@ -34,10 +59,6 @@ function signUpUser(values: Object) {
 .login {
   margin: 0 auto;
   max-width: 400px;
-}
-.goBackLink {
-  margin: 0;
-  padding: 0;
 }
 .login-container {
   padding: 1.625rem 1rem 1rem;

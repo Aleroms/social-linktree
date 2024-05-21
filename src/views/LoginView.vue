@@ -21,7 +21,7 @@
         autocomplete="on"
       />
     </FormKit>
-    <RouterLink to="/" class="goBackLink"> go back</RouterLink>
+    <RouterLink to="/"> go back</RouterLink>
   </section>
 </template>
 
@@ -55,6 +55,7 @@ function loginUser(values: LoginValues) {
     userStore.login(values)
   } catch (error) {
     console.log(error)
+    return
   }
 
   loginSuccess()
@@ -64,10 +65,6 @@ function loginUser(values: LoginValues) {
 <style scoped>
 .login {
   margin: 0 auto;
-}
-.goBackLink {
-  margin: 0;
-  padding: 0;
 }
 
 @media (min-width: 400px) {
