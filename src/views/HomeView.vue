@@ -2,6 +2,8 @@
 import SharableLinkVue from '@/components/ShareableLink.vue'
 import AuthButton from '@/components/AuthButton.vue'
 import { RouterLink } from 'vue-router'
+import { useUserStore } from '@/stores/user';
+const user = useUserStore()
 const test_data = {
   name: 'Jessica Randall',
   location: 'London, United Kingdom',
@@ -30,13 +32,15 @@ const test_data = {
   ],
   imageUrl: '/avatar-jessica.jpeg'
 }
+
 </script>
 
 <template>
   <section class="home">
     <SharableLinkVue :data="test_data" />
     <div class="auth-container">
-      <AuthButton name="Login" link="login" />
+      <AuthButton name="Login" link="login" v-if="!user.userLoggedIn"/>
+      <AuthButton name="Profile" link="profile" v-else/>
       <AuthButton name="Sign up" link="signup" />
     </div>
     <RouterLink to="policy">Policy</RouterLink>

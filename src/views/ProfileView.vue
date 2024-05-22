@@ -5,8 +5,18 @@
   </section>
   <RouterLink to="/">go back</RouterLink>
   <RouterLink to="/" target="_blank">preview</RouterLink>
+  <button @click="logout">Logout</button>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useUserStore } from '@/stores/user'
+import { useRouter } from 'vue-router'
+const user = useUserStore()
+const router = useRouter()
+function logout() {
+  user.logout()
+  router.push('/')
+}
+</script>
 
 <style scoped></style>

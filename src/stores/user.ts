@@ -1,9 +1,9 @@
-import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { type LoginValues } from '@/common/types'
+import { useStorage } from '@vueuse/core'
 
 export const useUserStore = defineStore('userStore', () => {
-  const userLoggedIn = ref(false)
+  const userLoggedIn = useStorage('userLoggedIn', false)
 
   function login(values: LoginValues) {
     //Todo: login user using aws cognito
