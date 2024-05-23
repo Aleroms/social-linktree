@@ -7,6 +7,6 @@ export interface Profile {
   name: string
   location: string
   quote: string
-  linktree: Array<{ platform: string; link: string }>
+  linktree: Array<{ platform: string; url: string }>
   imageUrl: string
 }

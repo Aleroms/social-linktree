@@ -27,3 +27,7 @@
   flex-direction: column;
   gap: 8px;
 }
+
+.formkit-suffix-icon svg{
+  width: 20px;
+}
