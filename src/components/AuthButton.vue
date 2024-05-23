@@ -20,6 +20,10 @@ const props = defineProps({
   link: {
     type: String,
     required: true
+  },
+  target: {
+    type: String,
+    required: false
   }
 })
 </script>
@@ -30,7 +34,7 @@ const props = defineProps({
   font-size: 18px;
   border: none;
   color: var(--color-text);
-  
+
   padding: 0.625rem;
   border-radius: var(--border-radius);
   cursor: pointer;

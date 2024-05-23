@@ -8,6 +8,7 @@
 function redirectToLink(link: string) {
   //todo: redirect to actual link
   alert(link)
+  window.open(link, '_blank')
 }
 defineProps({
   details: {
@@ -20,12 +21,13 @@ defineProps({
 <style scoped>
 .button-wrapper {
   margin: 1rem;
-  padding: 0.625rem 0;
+  padding: 0.625rem;
   border-radius: var(--border-radius);
   background-color: var(--color-background-mute);
   cursor: pointer;
   transition: 0.4s;
 }
+
 p {
   font-weight: 600;
 }

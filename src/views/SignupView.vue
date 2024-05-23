@@ -1,6 +1,5 @@
 <template>
   <section class="login">
-    <!-- temporary until add formkit -->
     <h1>Signup</h1>
     <p v-if="signup_alert_display">{{ signup_alert_message }}</p>
     <FormKit type="form" @submit="signUpUser" class="login-container">
@@ -60,12 +59,7 @@ function signUpUser(values: LoginValues) {
   margin: 0 auto;
   max-width: 400px;
 }
-.login-container {
-  padding: 1.625rem 1rem 1rem;
-  background-color: var(--color-background-soft);
-  text-align: center;
-  border-radius: var(--border-radius);
-}
+
 h1 {
   margin-bottom: 1rem;
 }

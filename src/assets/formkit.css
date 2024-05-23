@@ -1,7 +1,7 @@
 .formkit-form {
   padding: 1.625rem 1rem 1rem;
   margin-bottom: 1rem;
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   background-color: var(--color-background-soft);
   border-radius: var(--border-radius);
@@ -28,6 +28,16 @@
   gap: 8px;
 }
 
-.formkit-suffix-icon svg{
+.formkit-suffix-icon svg {
   width: 20px;
+}
+
+.group{
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 400px) {
+  .formkit-form {
+    width: 400px;
+  }
 }

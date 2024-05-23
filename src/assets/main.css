@@ -19,8 +19,24 @@ h1 {
   font-size: 25px;
 }
 
+button {
+  background-color: var(--color-background-mute);
+  /* font-size: 18px; */
+  border: none;
+  color: var(--color-text);
+
+  padding: 0.625rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: 0.4s;
+}
+
 @media (hover: hover) {
   a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);
+  }
+  button:hover {
+    background-color: var(--color-heading);
+    color: var(--color-background);
   }
 }
