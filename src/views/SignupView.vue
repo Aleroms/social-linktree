@@ -4,18 +4,19 @@
     <p v-if="signup_alert_display">{{ signup_alert_message }}</p>
     <FormKit type="form" @submit="signUpUser" class="login-container">
       <FormKit
-        type="text"
-        name="username"
-        id="name"
-        validation="required"
-        label="Name"
-        placeholder="username"
+        type="email"
+        name="email"
+        id="email"
+        validation="required,length:8"
+        label="Email"
+        placeholder="email@example.com"
       />
       <FormKit
         type="password"
         name="password"
         id="password"
-        validation="required"
+        validation="required,length:8,contains_lowercase,contains_uppercase,contains_symbol,contains_numeric"
+        validation-visibility="live"
         label="Password"
         placeholder="password"
         autocomplete="on"

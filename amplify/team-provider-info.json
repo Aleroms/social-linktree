@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-socialinktree-dev-59cad-authRole",
+      "UnauthRoleArn": "arn:aws:iam::561859508019:role/amplify-socialinktree-dev-59cad-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::561859508019:role/amplify-socialinktree-dev-59cad-authRole",
+      "Region": "us-west-1",
+      "DeploymentBucketName": "amplify-socialinktree-dev-59cad-deployment",
+      "UnauthRoleName": "amplify-socialinktree-dev-59cad-unauthRole",
+      "StackName": "amplify-socialinktree-dev-59cad",
+      "StackId": "arn:aws:cloudformation:us-west-1:561859508019:stack/amplify-socialinktree-dev-59cad/d63a98c0-1d23-11ef-a0ca-025826e7f24b",
+      "AmplifyAppId": "d3aec2d4mrw8df"
+    },
+    "categories": {
+      "auth": {
+        "socialinktree3e801ebf": {}
+      }
+    }
+  }
+}
