@@ -1,13 +1,18 @@
 import { defineStore } from 'pinia'
-import { type LoginValues } from '@/common/types'
+import { ref } from 'vue'
+import { type EmailAndPassword } from '@/common/types'
+import { type SignUpOutput } from 'aws-amplify/auth'
 import { useStorage } from '@vueuse/core'
+import { SignUpWithAmplify } from '@/plugins/Amplify'
 
 export const useUserStore = defineStore('userStore', () => {
   const userLoggedIn = useStorage('userLoggedIn', false)
+  const userEmail = ref('')
+  const cognitoUID = useStorage('user-id', '')
 
-  function login(values: LoginValues) {
+  function login(values: EmailAndPassword) {
     //Todo: login user using aws cognito
-    alert(values.username + '\n' + values.password)
+    alert(values.email + '\n' + values.password)
     userLoggedIn.value = true
   }
   function logout() {
@@ -16,10 +21,17 @@ export const useUserStore = defineStore('userStore', () => {
     userLoggedIn.value = false
   }
 
-  function register(values: LoginValues) {
-    // Todo: register user using aws dynamoDB or cognito
-    alert(values)
+  async function register(values: EmailAndPassword) {
+    console.log(values)
+    userEmail.value = values.email
+    try {
+      const { userId, nextStep }: SignUpOutput = await SignUpWithAmplify(values)
+      cognitoUID.value = userId
+      return nextStep.signUpStep
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  return { login, logout, userLoggedIn, register }
+  return { login, userEmail, logout, userLoggedIn, register }
 })
