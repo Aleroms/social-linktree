@@ -7,9 +7,7 @@ export interface EmailAndPassword {
   email: string
   password: string
 }
-export interface ConfirmationCode {
-  confirmationNumber: Number
-}
+
 
 export interface Profile {
   name: string

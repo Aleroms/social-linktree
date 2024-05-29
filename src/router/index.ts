@@ -26,10 +26,10 @@ const router = createRouter({
       name: 'profile',
       beforeEnter: (to, from) => {
         // Todo: need to download user data when I am provided user credentials
-        // const user = useUserStore()
-        // if (!user.userLoggedIn) {
-        //   router.push('/')
-        // }
+        const user = useUserStore()
+        if (!user.userLoggedIn) {
+          router.push('/')
+        }
       },
       component: () => import('@/views/ProfileView.vue')
     },

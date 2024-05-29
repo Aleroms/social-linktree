@@ -54,12 +54,10 @@
 import { useUserStore } from '@/stores/user'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import AuthButton from '@/components/AuthButton.vue'
 import LinkButton from '@/components/LinkButton.vue'
 const user = useUserStore()
 const router = useRouter()
 
-const profile_in_submission = ref(false)
 const profile_display = ref(false)
 const profile_display_message = ref('submitting data')
 

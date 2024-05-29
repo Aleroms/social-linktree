@@ -1,37 +1,50 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+
 import { type EmailAndPassword } from '@/common/types'
-import { type SignUpOutput } from 'aws-amplify/auth'
+
 import { useStorage } from '@vueuse/core'
-import { SignUpWithAmplify } from '@/plugins/Amplify'
+
+import { type SignUpOutput, type SignInInput } from 'aws-amplify/auth'
+import {
+  signUpWithAmplify,
+  confirmSignUpWithAmplify,
+  logoutWithAmplify,
+  signInWithAmplify
+} from '@/plugins/Amplify'
 
 export const useUserStore = defineStore('userStore', () => {
   const userLoggedIn = useStorage('userLoggedIn', false)
-  const userEmail = ref('')
+  const userEmail = useStorage('user-email', '')
   const cognitoUID = useStorage('user-id', '')
 
-  function login(values: EmailAndPassword) {
-    //Todo: login user using aws cognito
-    alert(values.email + '\n' + values.password)
+  async function login(values: SignInInput) {
+    await signInWithAmplify(values)
+    userEmail.value = values.username
     userLoggedIn.value = true
   }
-  function logout() {
-    // Todo: logout user using aws cognito
-    alert('logging out')
+  async function logout() {
+    await logoutWithAmplify()
     userLoggedIn.value = false
+    userEmail.value = ''
   }
 
   async function register(values: EmailAndPassword) {
-    console.log(values)
     userEmail.value = values.email
-    try {
-      const { userId, nextStep }: SignUpOutput = await SignUpWithAmplify(values)
-      cognitoUID.value = userId
-      return nextStep.signUpStep
-    } catch (error) {
-      console.log(error)
-    }
+
+    const { userId, nextStep }: SignUpOutput = await signUpWithAmplify(values)
+    cognitoUID.value = userId
+    return nextStep.signUpStep
   }
 
-  return { login, userEmail, logout, userLoggedIn, register }
+  async function confirmSignup(confirmationCode: string) {
+    const { isSignUpComplete, nextStep }: SignUpOutput = await confirmSignUpWithAmplify(
+      userEmail.value,
+      confirmationCode
+    )
+
+    if (isSignUpComplete) userLoggedIn.value = true
+    return nextStep.signUpStep
+  }
+
+  return { login, userEmail, logout, userLoggedIn, register, confirmSignup }
 })
