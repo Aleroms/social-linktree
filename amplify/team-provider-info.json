@@ -14,6 +14,18 @@
     "categories": {
       "auth": {
         "socialinktree3e801ebf": {}
+      },
+      "storage": {
+        "socialinktreeDB": {}
+      },
+      "function": {
+        "socialinktreeGetUser": {
+          "deploymentBucketName": "amplify-socialinktree-dev-59cad-deployment",
+          "s3Key": "amplify-builds/socialinktreeGetUser-494d4d45574b39675239-build.zip"
+        }
+      },
+      "api": {
+        "socialinktreeApi": {}
       }
     }
   }

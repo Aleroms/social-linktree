@@ -1,4 +1,20 @@
 {
+  "api": {
+    "socialinktreeApi": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "socialinktreeGetUser"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
   "auth": {
     "socialinktree3e801ebf": {
       "customAuth": false,
@@ -25,6 +41,37 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
+    }
+  },
+  "function": {
+    "socialinktreeGetUser": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_socialinktreeGetUser_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "socialinktreeGetUser"
+        }
+      ]
+    },
+    "AMPLIFY_function_socialinktreeGetUser_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "socialinktreeGetUser"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "socialinktreeDB": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
     }
   }
 }

@@ -1,0 +1,12 @@
+{
+  "resourceName": "socialinktreeDB",
+  "tableName": "socialinktree",
+  "partitionKey": {
+    "fieldName": "email",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": [
+    "socialinktreeDBTrigger32fd880c"
+  ]
+}

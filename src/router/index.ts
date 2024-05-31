@@ -22,6 +22,11 @@ const router = createRouter({
       //as a parameter
     },
     {
+      path: '/test',
+      name: 'test',
+      component: () => import('@/views/TestApi.vue')
+    },
+    {
       path: '/profile',
       name: 'profile',
       beforeEnter: (to, from) => {
