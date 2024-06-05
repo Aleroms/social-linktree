@@ -11,7 +11,7 @@
     <FormKit type="form" @submit="updateUserInfo">
       <h2>Update Form</h2>
       <p v-if="profile_display">{{ profile_display_message }}</p>
-      <FormKit type="file" label="Profile Image" accept=".png,.jpeg,.jpg" multiple="false" />
+      <!-- <FormKit type="file" label="Profile Image" accept=".png,.jpeg,.jpg" multiple="false" /> -->
       <FormKit
         type="text"
         label="Full Name"
@@ -33,9 +33,23 @@
         placeholder="Software Developer"
         validation="length:1,100"
       />
+      <FormKit
+        type="text"
+        label="username"
+        name="user_id"
+        placeholder="EvanYou_VueDev"
+        help="Pick a username people will search you by!"
+        validation="required:trim|contains_alphanumeric"
+      />
       <h2>Social Linktree</h2>
-      <FormKit type="list" :value="[{}]" dynamic #default="{ items, node, value }">
-        <FormKit type="group" v-for="(item, index) in items" :key="item" :index="index">
+      <FormKit type="list" name="linktree" :value="[{}]" dynamic #default="{ items, node, value }">
+        <FormKit
+          type="group"
+          name="linktree"
+          v-for="(item, index) in items"
+          :key="item"
+          :index="index"
+        >
           <div class="group">
             <FormKit type="text" name="platform" label="Platform" placeholder="GitHub" />
             <FormKit type="url" name="url" label="URL" placeholder="https://github.com/" />
@@ -55,14 +69,43 @@ import { useUserStore } from '@/stores/user'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import LinkButton from '@/components/LinkButton.vue'
+import { type Profile } from '@/common/types'
 const user = useUserStore()
 const router = useRouter()
 
 const profile_display = ref(false)
 const profile_display_message = ref('submitting data')
 
-function updateUserInfo(values: any) {
-  alert('ra')
+function updateUserInfo(values: Profile) {
+  console.log(values)
+  const api = 'https://zvevemcl2i.execute-api.us-west-1.amazonaws.com/user'
+  try {
+    fetch(api, {
+      method: 'PUT',
+      mode: 'cors',
+      body: JSON.stringify({
+        user_id: values.user_id,
+        name: values.name,
+        quote: values.quote,
+        location: values.location,
+        linktree: values.linktree
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((response) => {
+      if (!response.ok) {
+        // If response is not ok, throw an error
+        return response.text().then((text) => {
+          throw new Error(text)
+        })
+      }
+      return response.json()
+    })
+  } catch (error) {
+    console.log(error)
+  }
+
   console.log(values)
 }
 
@@ -80,7 +123,7 @@ function logout() {
   justify-content: center;
 }
 
-nav{
+nav {
   display: flex;
   align-items: center;
   justify-content: center;

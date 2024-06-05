@@ -8,11 +8,10 @@ export interface EmailAndPassword {
   password: string
 }
 
-
 export interface Profile {
   name: string
   location: string
   quote: string
-  linktree: Array<{ platform: string; url: string }>
-  imageUrl: string
+  linktree: { platform: string; url: string }[]
+  user_id: string
 }
