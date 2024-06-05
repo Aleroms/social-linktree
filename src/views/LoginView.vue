@@ -43,8 +43,10 @@ async function loginUser(values: SignInInput) {
 
   try {
     await userStore.login(values)
-  } catch (error) {
-    console.log(error)
+  } catch (error: any) {
+    if (error instanceof Error) {
+      login_alert_message.value = error.message
+    }
     return
   }
 
