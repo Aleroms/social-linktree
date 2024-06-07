@@ -16,6 +16,7 @@ export const useUserStore = defineStore('userStore', () => {
   const userLoggedIn = useStorage('userLoggedIn', false)
   const userEmail = useStorage('user-email', '')
   const cognitoUID = useStorage('user-id', '')
+  const username = useStorage('user_id', '')
 
   async function login(values: SignInInput) {
     await signInWithAmplify(values)
@@ -26,6 +27,9 @@ export const useUserStore = defineStore('userStore', () => {
     await logoutWithAmplify()
     userLoggedIn.value = false
     userEmail.value = ''
+  }
+  function profileUpdate(uid: string) {
+    username.value = uid
   }
 
   async function register(values: EmailAndPassword) {
@@ -46,5 +50,14 @@ export const useUserStore = defineStore('userStore', () => {
     return nextStep.signUpStep
   }
 
-  return { login, userEmail, logout, userLoggedIn, register, confirmSignup }
+  return {
+    login,
+    userEmail,
+    logout,
+    userLoggedIn,
+    register,
+    confirmSignup,
+    profileUpdate,
+    username
+  }
 })

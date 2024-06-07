@@ -1,4 +1,4 @@
-import { signUp, confirmSignUp, signOut, signIn, type SignInInput } from 'aws-amplify/auth'
+import { signUp, confirmSignUp, signOut, signIn, type SignInInput, deleteUser } from 'aws-amplify/auth'
 import { type EmailAndPassword, type Profile } from '@/common/types'
 
 const dynamoDbApi = 'https://zvevemcl2i.execute-api.us-west-1.amazonaws.com/user'
@@ -27,35 +27,43 @@ async function signInWithAmplify(input: SignInInput) {
   console.log(result)
 }
 
-function DeleteUserFromTable(){
+function DeleteUserFromTable(uid: string) {
+  fetch(dynamoDbApi + `/${uid}`, {
+    method: 'DELETE',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
 
+}
+async function deleteUserFromAmplify(){
+  await deleteUser()
 }
 
 function InsertUserToTable(values: Profile) {
-
-    fetch(dynamoDbApi, {
-      method: 'PUT',
-      mode: 'cors',
-      body: JSON.stringify({
-        user_id: values.user_id,
-        name: values.name,
-        quote: values.quote,
-        location: values.location,
-        linktree: values.linktree
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then((response) => {
-      if (!response.ok) {
-        // If response is not ok, throw an error
-        return response.text().then((text) => {
-          throw new Error(text)
-        })
-      }
-      return response.json()
-    })
-   
+  fetch(dynamoDbApi, {
+    method: 'PUT',
+    mode: 'cors',
+    body: JSON.stringify({
+      user_id: values.user_id,
+      name: values.name,
+      quote: values.quote,
+      location: values.location,
+      linktree: values.linktree
+    }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then((response) => {
+    if (!response.ok) {
+      // If response is not ok, throw an error
+      return response.text().then((text) => {
+        throw new Error(text)
+      })
+    }
+    return response.json()
+  })
 }
 
 export {
@@ -64,5 +72,6 @@ export {
   logoutWithAmplify,
   signInWithAmplify,
   InsertUserToTable,
-  DeleteUserFromTable
+  DeleteUserFromTable,
+  deleteUserFromAmplify
 }

@@ -83,10 +83,11 @@ function updateUserInfo(values: Profile) {
   console.log(values)
   try {
     InsertUserToTable(values)
+    user.profileUpdate(values.user_id)
   } catch (error) {
     console.log(error)
   }
-
+  // push next route which displays the user's profile card
   console.log(values)
 }
 
