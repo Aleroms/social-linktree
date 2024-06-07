@@ -58,6 +58,11 @@ const router = createRouter({
       path: '/signup',
       name: 'signup',
       component: () => import('@/views/SignupView.vue')
+    },
+    {
+      path: '/deleteAccount',
+      name: 'deleteAccount',
+      component: () => import('@/views/DeleteAccountView.vue')
     }
   ]
 })

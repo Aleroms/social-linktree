@@ -61,6 +61,7 @@
         <button type="button" @click="() => node.input(value!.concat({}))">+ Add another</button>
       </FormKit>
     </FormKit>
+    <AuthButton name="Delete Account" link="deleteAccount" />
   </section>
 </template>
 
@@ -70,6 +71,8 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import LinkButton from '@/components/LinkButton.vue'
 import { type Profile } from '@/common/types'
+import AuthButton from '@/components/AuthButton.vue'
+import { InsertUserToTable } from '@/plugins/Amplify'
 const user = useUserStore()
 const router = useRouter()
 
@@ -78,30 +81,8 @@ const profile_display_message = ref('submitting data')
 
 function updateUserInfo(values: Profile) {
   console.log(values)
-  const api = 'https://zvevemcl2i.execute-api.us-west-1.amazonaws.com/user'
   try {
-    fetch(api, {
-      method: 'PUT',
-      mode: 'cors',
-      body: JSON.stringify({
-        user_id: values.user_id,
-        name: values.name,
-        quote: values.quote,
-        location: values.location,
-        linktree: values.linktree
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then((response) => {
-      if (!response.ok) {
-        // If response is not ok, throw an error
-        return response.text().then((text) => {
-          throw new Error(text)
-        })
-      }
-      return response.json()
-    })
+    InsertUserToTable(values)
   } catch (error) {
     console.log(error)
   }
