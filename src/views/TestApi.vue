@@ -9,9 +9,6 @@
 import { onMounted } from 'vue'
 import { ref } from 'vue'
 import { get } from 'aws-amplify/api'
-
-// const testId = 421
-
 const res = ref('')
 onMounted(async () => {
   const response = await fetch('https://zvevemcl2i.execute-api.us-west-1.amazonaws.com/user/JessicaRandall')

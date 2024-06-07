@@ -1,4 +1,11 @@
-import { signUp, confirmSignUp, signOut, signIn, type SignInInput, deleteUser } from 'aws-amplify/auth'
+import {
+  signUp,
+  confirmSignUp,
+  signOut,
+  signIn,
+  type SignInInput,
+  deleteUser
+} from 'aws-amplify/auth'
 import { type EmailAndPassword, type Profile } from '@/common/types'
 
 const dynamoDbApi = 'https://zvevemcl2i.execute-api.us-west-1.amazonaws.com/user'
@@ -35,9 +42,26 @@ function DeleteUserFromTable(uid: string) {
       'Content-Type': 'application/json'
     }
   })
-
 }
-async function deleteUserFromAmplify(){
+
+async function GetUserFromTable(user_id: string): Promise<any> {
+  const response = await fetch(dynamoDbApi + `/${user_id}`, {
+    method: 'GET',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+
+  if (!response.ok) {
+    // If response is not ok, throw an error with the response text
+    const errorText = await response.text();
+    throw new Error(errorText);
+  }
+
+  return response.json();
+}
+async function deleteUserFromAmplify() {
   await deleteUser()
 }
 
@@ -73,5 +97,6 @@ export {
   signInWithAmplify,
   InsertUserToTable,
   DeleteUserFromTable,
-  deleteUserFromAmplify
+  deleteUserFromAmplify,
+  GetUserFromTable
 }

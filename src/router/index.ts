@@ -63,6 +63,18 @@ const router = createRouter({
       path: '/deleteAccount',
       name: 'deleteAccount',
       component: () => import('@/views/DeleteAccountView.vue')
+    },
+    {
+      path: '/test2/:testId',
+      name: 'test2',
+      component: () => import('@/views/TestUrlParam.vue'),
+      props: true
+    },
+    {
+      path: '/user/:user_id',
+      name: 'userProfile',
+      component: () => import('@/views/UserView.vue'),
+      props: true
     }
   ]
 })

@@ -88,7 +88,7 @@ function updateUserInfo(values: Profile) {
     console.log(error)
   }
   // push next route which displays the user's profile card
-  console.log(values)
+  router.push('/user/' + values.user_id)
 }
 
 function logout() {
