@@ -28,6 +28,13 @@
       />
       <FormKit
         type="text"
+        label="Quote"
+        name="quote"
+        placeholder="Front-end developer and..."
+        validation="length:1,100"
+      />
+      <FormKit
+        type="text"
         label="Title"
         name="title"
         placeholder="Software Developer"
@@ -35,7 +42,7 @@
       />
       <FormKit
         type="text"
-        label="username"
+        label="Username"
         name="user_id"
         placeholder="EvanYou_VueDev"
         help="Pick a username people will search you by!"
@@ -52,7 +59,7 @@
         >
           <div class="group">
             <FormKit type="text" name="platform" label="Platform" placeholder="GitHub" />
-            <FormKit type="url" name="url" label="URL" placeholder="https://github.com/" />
+            <FormKit type="url" name="link" label="URL" placeholder="https://github.com/" />
             <button type="button" @click="() => node.input(value!.filter((_, i) => i !== index))">
               - Remove
             </button>

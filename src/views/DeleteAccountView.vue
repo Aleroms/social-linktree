@@ -27,9 +27,10 @@ async function deleteAccount() {
   if (userStore.username !== null || userStore.username !== '') {
     try {
       DeleteUserFromTable(userStore.username)
-      userStore.deleteUser()
       await deleteUserFromAmplify()
+      userStore.deleteUser()
       delete_msg.value = 'deleted!'
+      router.push('/')
     } catch (error) {
       console.log(error)
       delete_msg.value = 'error occurred.'

@@ -81,9 +81,8 @@ async function signUpUser(values: EmailAndPassword) {
   try {
     confirm_signup.value = await userStore.register(values)
   } catch (error) {
-    if (error instanceof Error) {
-      signup_alert_message.value = error.message
-    }
+    signup_alert_message.value = "Error Occurred."
+    return
   }
 
   signup_alert_display.value = false

@@ -12,6 +12,6 @@ export interface Profile {
   name: string
   location: string
   quote: string
-  linktree: { platform: string; url: string }[]
+  linktree: { platform: string; link: string }[]
   user_id: string
 }

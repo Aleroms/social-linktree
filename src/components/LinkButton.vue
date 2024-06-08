@@ -8,7 +8,9 @@
 function redirectToLink(link: string) {
   //todo: redirect to actual link
   alert(link)
-  window.open(link, '_blank')
+  if (link !== undefined) {
+    window.open(link, '_blank')
+  }
 }
 defineProps({
   details: {
