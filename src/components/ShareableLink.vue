@@ -22,6 +22,7 @@ defineProps({
 <style scoped>
 .sharable-link-container {
   max-width: 400px;
+  margin-bottom: 1rem;
   padding: 1.625rem 1rem 1rem;
   background-color: var(--color-background-soft);
   text-align: center;

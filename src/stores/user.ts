@@ -31,6 +31,12 @@ export const useUserStore = defineStore('userStore', () => {
   function profileUpdate(uid: string) {
     username.value = uid
   }
+  function deleteUser() {
+    userLoggedIn.value = false
+    userEmail.value = ''
+    cognitoUID.value = ''
+    username.value = ''
+  }
 
   async function register(values: EmailAndPassword) {
     userEmail.value = values.email
@@ -58,6 +64,7 @@ export const useUserStore = defineStore('userStore', () => {
     register,
     confirmSignup,
     profileUpdate,
-    username
+    username,
+    deleteUser
   }
 })

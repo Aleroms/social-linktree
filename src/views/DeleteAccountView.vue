@@ -1,7 +1,11 @@
 <template>
   <section class="delete-wrapper">
     <h1>Are you sure you want to delete your account?</h1>
-    <p></p>
+    <p>
+      Data attached to {{ userStore.userEmail }} ({{ userStore.username }}) will be perminantly
+      deleted.
+    </p>
+    <p v-if="delete_display">{{ delete_msg }}</p>
     <div class="btns">
       <button @click="deleteAccount">Yes</button>
       <button @click="router.back()">No</button>
@@ -23,6 +27,7 @@ async function deleteAccount() {
   if (userStore.username !== null || userStore.username !== '') {
     try {
       DeleteUserFromTable(userStore.username)
+      userStore.deleteUser()
       await deleteUserFromAmplify()
       delete_msg.value = 'deleted!'
     } catch (error) {

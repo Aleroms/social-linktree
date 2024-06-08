@@ -45,21 +45,22 @@ function DeleteUserFromTable(uid: string) {
 }
 
 async function GetUserFromTable(user_id: string): Promise<any> {
+  console.log(user_id)
   const response = await fetch(dynamoDbApi + `/${user_id}`, {
     method: 'GET',
     mode: 'cors',
     headers: {
       'Content-Type': 'application/json'
     }
-  });
+  })
 
   if (!response.ok) {
     // If response is not ok, throw an error with the response text
-    const errorText = await response.text();
-    throw new Error(errorText);
+    const errorText = await response.text()
+    throw new Error(errorText)
   }
-
-  return response.json();
+  console.log(response)
+  return response.json()
 }
 async function deleteUserFromAmplify() {
   await deleteUser()

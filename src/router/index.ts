@@ -62,7 +62,14 @@ const router = createRouter({
     {
       path: '/deleteAccount',
       name: 'deleteAccount',
-      component: () => import('@/views/DeleteAccountView.vue')
+      component: () => import('@/views/DeleteAccountView.vue'),
+      beforeEnter: (to, from) => {
+        // Todo: need to download user data when I am provided user credentials
+        const user = useUserStore()
+        if (!user.userLoggedIn) {
+          router.push('/')
+        }
+      }
     },
     {
       path: '/test2/:testId',
