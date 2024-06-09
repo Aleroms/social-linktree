@@ -6,6 +6,7 @@
       <RouterLink to="/"> go back</RouterLink>
       <LinkButton :details="{ link: '/', platform: 'Preview' }" />
       <button @click="logout">Logout</button>
+      <AuthButton name="Delete Account" link="deleteAccount" />
     </nav>
 
     <FormKit type="form" @submit="updateUserInfo">
@@ -15,7 +16,7 @@
       <FormKit
         type="text"
         label="Full Name"
-        name="fullname"
+        name="name"
         placeholder="Evan You"
         validation="length:1,100"
       />
@@ -31,13 +32,6 @@
         label="Quote"
         name="quote"
         placeholder="Front-end developer and..."
-        validation="length:1,100"
-      />
-      <FormKit
-        type="text"
-        label="Title"
-        name="title"
-        placeholder="Software Developer"
         validation="length:1,100"
       />
       <FormKit
@@ -68,7 +62,7 @@
         <button type="button" @click="() => node.input(value!.concat({}))">+ Add another</button>
       </FormKit>
     </FormKit>
-    <AuthButton name="Delete Account" link="deleteAccount" />
+    
   </section>
 </template>
 
@@ -87,6 +81,7 @@ const profile_display = ref(false)
 const profile_display_message = ref('submitting data')
 
 function updateUserInfo(values: Profile) {
+  values.email = user.userEmail
   console.log(values)
   try {
     InsertUserToTable(values)
@@ -116,5 +111,13 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 20px;
+}
+
+@media(max-width: 400px){
+  nav{
+    flex-direction: column;
+    margin: 1rem;
+  }
 }
 </style>

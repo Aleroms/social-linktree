@@ -72,6 +72,7 @@ function InsertUserToTable(values: Profile) {
     mode: 'cors',
     body: JSON.stringify({
       user_id: values.user_id,
+      email: values.email,
       name: values.name,
       quote: values.quote,
       location: values.location,

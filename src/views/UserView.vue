@@ -22,7 +22,7 @@ onMounted(async () => {
   try {
     if (typeof route.params.user_id === 'string') {
       const response = await GetUserFromTable(route.params.user_id)
-      console.log(response)
+      // console.log(response)
       userData.value = response
       isReady.value = true
     } else {

@@ -4,7 +4,7 @@
     <h1>{{ data.name }}</h1>
     <h2>{{ data.location }}</h2>
     <p>"{{ data.quote }}"</p>
-    <LinksList :linktree="data.linktree" />
+    <LinksList :linktree="data.linktree" v-if="data.linktree.length > 1" />
   </div>
 </template>
 
@@ -17,6 +17,7 @@ defineProps({
     required: true
   }
 })
+
 </script>
 
 <style scoped>
@@ -39,8 +40,8 @@ p {
   margin-top: 1rem;
   opacity: 0.7;
 }
-@media(min-width: 400px){
-  .sharable-link-container{
+@media (min-width: 400px) {
+  .sharable-link-container {
     width: 400px;
   }
 }

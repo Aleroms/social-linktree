@@ -10,6 +10,7 @@ export interface EmailAndPassword {
 
 export interface Profile {
   name: string
+  email?: string
   location: string
   quote: string
   linktree: { platform: string; link: string }[]
