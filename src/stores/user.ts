@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 
 import { type EmailAndPassword } from '@/common/types'
 
-import { useStorage } from '@vueuse/core'
+import { useStorage, useSessionStorage } from '@vueuse/core'
 
 import { type SignUpOutput, type SignInInput } from 'aws-amplify/auth'
 import {
@@ -13,8 +13,8 @@ import {
 } from '@/plugins/Amplify'
 
 export const useUserStore = defineStore('userStore', () => {
-  const userLoggedIn = useStorage('userLoggedIn', false)
-  const userEmail = useStorage('user-email', '')
+  const userLoggedIn = useSessionStorage('userLoggedIn', false)
+  const userEmail = useSessionStorage('user-email', '')
   const cognitoUID = useStorage('user-id', '')
   const username = useStorage('user_id', '')
 
@@ -40,8 +40,8 @@ export const useUserStore = defineStore('userStore', () => {
 
   async function register(values: EmailAndPassword) {
     userEmail.value = values.email
-
     const { userId, nextStep }: SignUpOutput = await signUpWithAmplify(values)
+
     cognitoUID.value = userId
     return nextStep.signUpStep
   }
