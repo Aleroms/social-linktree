@@ -4,7 +4,7 @@
     <h1>{{ data.name }}</h1>
     <h2>{{ data.location }}</h2>
     <p>"{{ data.quote }}"</p>
-    <LinksList :linktree="data.linktree" v-if="data.linktree.length > 1" />
+    <LinksList :linktree="data.linktree" v-if="data.linktree.length > 0" />
   </div>
 </template>
 

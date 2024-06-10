@@ -34,14 +34,6 @@
         placeholder="Front-end developer and..."
         validation="length:1,100"
       />
-      <FormKit
-        type="text"
-        label="Username"
-        name="user_id"
-        placeholder="EvanYou_VueDev"
-        help="Pick a username people will search you by!"
-        validation="required:trim|contains_alphanumeric"
-      />
       <h2>Social Linktree</h2>
       <FormKit type="list" name="linktree" :value="[{}]" dynamic #default="{ items, node, value }">
         <FormKit
@@ -82,10 +74,11 @@ const profile_display_message = ref('submitting data')
 
 function updateUserInfo(values: Profile) {
   values.email = user.userEmail
+  values.user_id = user.username
   console.log(values)
   try {
     InsertUserToTable(values)
-    user.profileUpdate(values.user_id)
+    // user.profileUpdate(values.user_id)
   } catch (error) {
     console.log(error)
   }

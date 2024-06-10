@@ -100,7 +100,7 @@ async function confirmUser({ confirmationNumber }: { confirmationNumber: string 
     confirm_signup_fail.value = true
     return
   }
-  router.push('/profile')
+  router.push('/createUser')
 }
 </script>
 

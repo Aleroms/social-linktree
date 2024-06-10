@@ -62,7 +62,6 @@ async function DoesUsernameExist(user_id: string): Promise<any> {
   return response.json()
 }
 async function GetUserFromTable(user_id: string): Promise<any> {
-  console.log(user_id)
   const response = await fetch(dynamoDbApi + "/user" + `/${user_id}`, {
     method: 'GET',
     mode: 'cors',
@@ -76,7 +75,6 @@ async function GetUserFromTable(user_id: string): Promise<any> {
     const errorText = await response.text()
     throw new Error(errorText)
   }
-  console.log(response)
   return response.json()
 }
 async function deleteUserFromAmplify() {

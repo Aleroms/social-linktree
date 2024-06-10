@@ -9,7 +9,8 @@ import {
   signUpWithAmplify,
   confirmSignUpWithAmplify,
   logoutWithAmplify,
-  signInWithAmplify
+  signInWithAmplify,
+  DoesUsernameExist
 } from '@/plugins/Amplify'
 
 export const useUserStore = defineStore('userStore', () => {
@@ -30,6 +31,11 @@ export const useUserStore = defineStore('userStore', () => {
   }
   function profileUpdate(uid: string) {
     username.value = uid
+  }
+  async function doesUserExist(user_id: string) {
+    const res = await DoesUsernameExist(user_id)
+    username.value = user_id
+    return res
   }
   function deleteUser() {
     userLoggedIn.value = false
@@ -65,6 +71,7 @@ export const useUserStore = defineStore('userStore', () => {
     confirmSignup,
     profileUpdate,
     username,
-    deleteUser
+    deleteUser,
+    doesUserExist
   }
 })
