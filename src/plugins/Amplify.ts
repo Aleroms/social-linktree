@@ -8,7 +8,7 @@ import {
 } from 'aws-amplify/auth'
 import { type EmailAndPassword, type Profile } from '@/common/types'
 
-const dynamoDbApi = 'https://zvevemcl2i.execute-api.us-west-1.amazonaws.com/user'
+const dynamoDbApi = 'https://zvevemcl2i.execute-api.us-west-1.amazonaws.com'
 async function signUpWithAmplify(values: EmailAndPassword) {
   const result = await signUp({
     username: values.email,
@@ -35,7 +35,7 @@ async function signInWithAmplify(input: SignInInput) {
 }
 
 function DeleteUserFromTable(uid: string) {
-  fetch(dynamoDbApi + `/${uid}`, {
+  fetch(dynamoDbApi + "/user" +`/${uid}`, {
     method: 'DELETE',
     mode: 'cors',
     headers: {
@@ -43,10 +43,27 @@ function DeleteUserFromTable(uid: string) {
     }
   })
 }
+async function DoesUsernameExist(user_id: string): Promise<any> {
+  console.log(user_id)
+  const response = await fetch(dynamoDbApi + "/doesExist" + `/${user_id}`, {
+    method: 'GET',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
 
+  if (!response.ok) {
+    // If response is not ok, throw an error with the response text
+    const errorText = await response.text()
+    throw new Error(errorText)
+  }
+  console.log(response)
+  return response.json()
+}
 async function GetUserFromTable(user_id: string): Promise<any> {
   console.log(user_id)
-  const response = await fetch(dynamoDbApi + `/${user_id}`, {
+  const response = await fetch(dynamoDbApi + "/user" + `/${user_id}`, {
     method: 'GET',
     mode: 'cors',
     headers: {
@@ -67,7 +84,7 @@ async function deleteUserFromAmplify() {
 }
 
 function InsertUserToTable(values: Profile) {
-  fetch(dynamoDbApi, {
+  fetch(dynamoDbApi + "/user", {
     method: 'PUT',
     mode: 'cors',
     body: JSON.stringify({
@@ -100,5 +117,6 @@ export {
   InsertUserToTable,
   DeleteUserFromTable,
   deleteUserFromAmplify,
-  GetUserFromTable
+  GetUserFromTable,
+  DoesUsernameExist
 }
