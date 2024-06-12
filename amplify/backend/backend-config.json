@@ -29,5 +29,11 @@
     }
   },
   "function": {},
-  "storage": {}
+  "storage": {
+    "socialinktreeContent": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
+    }
+  }
 }
