@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>upload file</h1>
+    <h1>Upload File</h1>
     <FormKit type="form" @submit="handleUploadFile">
       <FormKit type="file" name="profile_img" />
     </FormKit>
@@ -9,8 +9,10 @@
 
 <script setup lang="ts">
 import { uploadFileToS3 } from '@/plugins/Amplify'
-async function handleUploadFile(values: {}) {
-  const response = await uploadFileToS3(values)
+async function handleUploadFile(values: any) {
+  console.log(values)
+  const file = values.profile_img[0]
+  const response = await uploadFileToS3(file)
 }
 </script>
 

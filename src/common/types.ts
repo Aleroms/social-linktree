@@ -16,3 +16,8 @@ export interface Profile {
   linktree: { platform: string; link: string }[]
   user_id: string
 }
+
+export interface UploadFile {
+  name: string,
+  file: File
+}

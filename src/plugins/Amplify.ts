@@ -6,7 +6,10 @@ import {
   type SignInInput,
   deleteUser
 } from 'aws-amplify/auth'
-import { type EmailAndPassword, type Profile } from '@/common/types'
+import { type EmailAndPassword, type Profile, type UploadFile } from '@/common/types'
+import { uploadData } from 'aws-amplify/storage'
+import { useUserStore } from '@/stores/user'
+
 
 const dynamoDbApi = 'https://zvevemcl2i.execute-api.us-west-1.amazonaws.com'
 async function signUpWithAmplify(values: EmailAndPassword) {
@@ -35,7 +38,7 @@ async function signInWithAmplify(input: SignInInput) {
 }
 
 function DeleteUserFromTable(uid: string) {
-  fetch(dynamoDbApi + "/user" +`/${uid}`, {
+  fetch(dynamoDbApi + '/user' + `/${uid}`, {
     method: 'DELETE',
     mode: 'cors',
     headers: {
@@ -45,7 +48,7 @@ function DeleteUserFromTable(uid: string) {
 }
 async function DoesUsernameExist(user_id: string): Promise<any> {
   console.log(user_id)
-  const response = await fetch(dynamoDbApi + "/doesExist" + `/${user_id}`, {
+  const response = await fetch(dynamoDbApi + '/doesExist' + `/${user_id}`, {
     method: 'GET',
     mode: 'cors',
     headers: {
@@ -62,7 +65,7 @@ async function DoesUsernameExist(user_id: string): Promise<any> {
   return response.json()
 }
 async function GetUserFromTable(user_id: string): Promise<any> {
-  const response = await fetch(dynamoDbApi + "/user" + `/${user_id}`, {
+  const response = await fetch(dynamoDbApi + '/user' + `/${user_id}`, {
     method: 'GET',
     mode: 'cors',
     headers: {
@@ -82,7 +85,7 @@ async function deleteUserFromAmplify() {
 }
 
 function InsertUserToTable(values: Profile) {
-  fetch(dynamoDbApi + "/user", {
+  fetch(dynamoDbApi + '/user', {
     method: 'PUT',
     mode: 'cors',
     body: JSON.stringify({
@@ -107,8 +110,22 @@ function InsertUserToTable(values: Profile) {
   })
 }
 
-async function uploadFileToS3(values: any){
+async function uploadFileToS3(input: UploadFile) {
+  const userStore = useUserStore()
+  const {name, file} = input
 
+  try {
+    const result = await uploadData({
+      path: `${userStore.username}/${name}`,
+      data: file
+    })
+    console.log('Succeeded: ', result)
+  } catch (error) {
+    console.log('Error: ', error)
+  }
+}
+async function uploadFileToS3V2(input: UploadFile){
+  
 }
 
 export {

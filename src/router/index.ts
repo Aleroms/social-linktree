@@ -27,6 +27,17 @@ const router = createRouter({
       component: () => import('@/views/TestApi.vue')
     },
     {
+      path: '/test2/:testId',
+      name: 'test2',
+      component: () => import('@/views/TestUrlParam.vue'),
+      props: true
+    },
+    {
+      path: '/test3',
+      name: 'test3',
+      component: () => import('@/views/test/TestFileUpload.vue')
+    },
+    {
       path: '/profile',
       name: 'profile',
       beforeEnter: (to, from) => {
@@ -71,12 +82,7 @@ const router = createRouter({
         }
       }
     },
-    {
-      path: '/test2/:testId',
-      name: 'test2',
-      component: () => import('@/views/TestUrlParam.vue'),
-      props: true
-    },
+
     {
       path: '/user/:user_id',
       name: 'userProfile',
