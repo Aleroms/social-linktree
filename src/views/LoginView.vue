@@ -34,10 +34,11 @@ const router = useRouter()
 
 //login display variables & methods
 const login_alert_display = ref(false)
-const login_alert_message = ref('Please wait, you are being logged in...')
+const login_alert_message = ref('')
 const login_in_submission = ref(false)
 
 async function loginUser(values: SignInInput) {
+  login_alert_message.value = 'Please wait, you are being logged in...'
   login_alert_display.value = true
   login_in_submission.value = true
 
@@ -46,6 +47,11 @@ async function loginUser(values: SignInInput) {
   } catch (error: any) {
     if (error instanceof Error) {
       login_alert_message.value = error.message
+      if (error.name === 'UserAlreadyAuthenticatedException') {
+        userStore.login2(values)
+        login_alert_message.value = 'Success'
+        router.push('/profile')
+      }
     }
     return
   }

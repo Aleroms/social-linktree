@@ -24,6 +24,10 @@ export const useUserStore = defineStore('userStore', () => {
     userEmail.value = values.username
     userLoggedIn.value = true
   }
+  function login2(values: SignInInput) {
+    userEmail.value = values.username
+    userLoggedIn.value = true
+  }
   async function logout() {
     await logoutWithAmplify()
     userLoggedIn.value = false
@@ -64,6 +68,7 @@ export const useUserStore = defineStore('userStore', () => {
 
   return {
     login,
+    login2,
     userEmail,
     logout,
     userLoggedIn,
