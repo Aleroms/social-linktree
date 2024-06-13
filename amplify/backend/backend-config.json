@@ -28,10 +28,26 @@
       "service": "Cognito"
     }
   },
-  "function": {},
+  "function": {
+    "S3Trigger779fe339": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
   "storage": {
-    "socialinktreeContent": {
-      "dependsOn": [],
+    "socialinktreeContent2": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "LambdaExecutionRole"
+          ],
+          "category": "function",
+          "resourceName": "S3Trigger779fe339"
+        }
+      ],
       "providerPlugin": "awscloudformation",
       "service": "S3"
     }

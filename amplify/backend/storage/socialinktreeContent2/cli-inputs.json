@@ -1,0 +1,18 @@
+{
+  "resourceName": "socialinktreeContent2",
+  "policyUUID": "57060a65",
+  "bucketName": "socialinktreeimages",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "S3Trigger779fe339",
+  "groupAccess": {}
+}

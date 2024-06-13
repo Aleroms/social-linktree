@@ -19,5 +19,6 @@ export interface Profile {
 
 export interface UploadFile {
   name: string,
-  file: File
+  file: File,
+  
 }

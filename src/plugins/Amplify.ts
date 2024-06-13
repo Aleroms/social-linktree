@@ -11,7 +11,7 @@ import { uploadData } from 'aws-amplify/storage'
 import { useUserStore } from '@/stores/user'
 
 
-const dynamoDbApi = 'https://zvevemcl2i.execute-api.us-west-1.amazonaws.com'
+const lambdaApi = 'https://zvevemcl2i.execute-api.us-west-1.amazonaws.com'
 async function signUpWithAmplify(values: EmailAndPassword) {
   const result = await signUp({
     username: values.email,
@@ -38,7 +38,7 @@ async function signInWithAmplify(input: SignInInput) {
 }
 
 function DeleteUserFromTable(uid: string) {
-  fetch(dynamoDbApi + '/user' + `/${uid}`, {
+  fetch(lambdaApi + '/user' + `/${uid}`, {
     method: 'DELETE',
     mode: 'cors',
     headers: {
@@ -48,7 +48,7 @@ function DeleteUserFromTable(uid: string) {
 }
 async function DoesUsernameExist(user_id: string): Promise<any> {
   console.log(user_id)
-  const response = await fetch(dynamoDbApi + '/doesExist' + `/${user_id}`, {
+  const response = await fetch(lambdaApi + '/doesExist' + `/${user_id}`, {
     method: 'GET',
     mode: 'cors',
     headers: {
@@ -65,7 +65,7 @@ async function DoesUsernameExist(user_id: string): Promise<any> {
   return response.json()
 }
 async function GetUserFromTable(user_id: string): Promise<any> {
-  const response = await fetch(dynamoDbApi + '/user' + `/${user_id}`, {
+  const response = await fetch(lambdaApi + '/user' + `/${user_id}`, {
     method: 'GET',
     mode: 'cors',
     headers: {
@@ -84,8 +84,20 @@ async function deleteUserFromAmplify() {
   await deleteUser()
 }
 
+function uploadFileToS3V2(input: File){
+  fetch(lambdaApi + '/uploadFile',{
+    method: 'POST',
+    mode: 'cors',
+    body: input,
+    headers: {
+      'X-S3-File-Name': input.name,
+      'Content-Type': input.type
+    },
+    
+  })
+}
 function InsertUserToTable(values: Profile) {
-  fetch(dynamoDbApi + '/user', {
+  fetch(lambdaApi + '/user', {
     method: 'PUT',
     mode: 'cors',
     body: JSON.stringify({
@@ -124,9 +136,7 @@ async function uploadFileToS3(input: UploadFile) {
     console.log('Error: ', error)
   }
 }
-async function uploadFileToS3V2(input: UploadFile){
-  
-}
+
 
 export {
   signUpWithAmplify,
