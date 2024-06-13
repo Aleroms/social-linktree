@@ -107,6 +107,10 @@ function InsertUserToTable(values: Profile) {
   })
 }
 
+async function uploadFileToS3(values: any){
+
+}
+
 export {
   signUpWithAmplify,
   confirmSignUpWithAmplify,
@@ -116,5 +120,6 @@ export {
   DeleteUserFromTable,
   deleteUserFromAmplify,
   GetUserFromTable,
-  DoesUsernameExist
+  DoesUsernameExist,
+  uploadFileToS3
 }
