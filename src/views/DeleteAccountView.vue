@@ -33,7 +33,7 @@ async function deleteAccount() {
       router.push('/')
     } catch (error) {
       console.log(error)
-      delete_msg.value = 'error occurred.'
+      delete_msg.value = 'error occurred. Please sign out and sign back in to try again'
       return
     }
   } else {

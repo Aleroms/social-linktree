@@ -18,6 +18,8 @@
 import { ref } from 'vue'
 import { useUserStore } from '@/stores/user'
 import { useRouter } from 'vue-router'
+import { InsertUserToTable } from '@/plugins/Amplify'
+import type { Profile } from '@/common/types'
 
 const userStore = useUserStore()
 const router = useRouter()
@@ -32,7 +34,15 @@ async function usernameHandler({ user_id }: { user_id: string }) {
   try {
     isUsernameAvailable.value = await userStore.doesUserExist(user_id)
     if (!isUsernameAvailable.value) {
-      //save username and attach it to request when submitted documents
+      const userEmptyValue: Profile = {
+        user_id: user_id,
+        email: userStore.userEmail,
+        location: '',
+        quote: '',
+        linktree: [],
+        name: ''
+      }
+      InsertUserToTable(userEmptyValue)
       userStore.username = user_id
       router.push('/profile')
     } else {

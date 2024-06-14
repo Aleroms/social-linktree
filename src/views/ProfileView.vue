@@ -1,10 +1,10 @@
 <template>
   <section class="profile-container">
-    <h1>My Profile</h1>
+    <h1>My Profile: {{ user.username }}</h1>
     <p>This is where you can add, remove and update information from your linktree.</p>
     <nav>
       <RouterLink to="/"> go back</RouterLink>
-      <LinkButton :details="{ link: '/', platform: 'Preview' }" />
+      <LinkButton :details="{ link: `/user/${user.username}`, platform: 'Preview' }" />
       <button @click="logout">Logout</button>
       <AuthButton name="Delete Account" link="deleteAccount" />
     </nav>
@@ -54,7 +54,6 @@
         <button type="button" @click="() => node.input(value!.concat({}))">+ Add another</button>
       </FormKit>
     </FormKit>
-    
   </section>
 </template>
 
@@ -107,8 +106,8 @@ nav {
   gap: 20px;
 }
 
-@media(max-width: 400px){
-  nav{
+@media (max-width: 400px) {
+  nav {
     flex-direction: column;
     margin: 1rem;
   }

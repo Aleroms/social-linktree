@@ -22,22 +22,6 @@ const router = createRouter({
       //as a parameter
     },
     {
-      path: '/test',
-      name: 'test',
-      component: () => import('@/views/TestApi.vue')
-    },
-    {
-      path: '/test2/:testId',
-      name: 'test2',
-      component: () => import('@/views/TestUrlParam.vue'),
-      props: true
-    },
-    {
-      path: '/test3',
-      name: 'test3',
-      component: () => import('@/views/test/TestFileUpload.vue')
-    },
-    {
       path: '/profile',
       name: 'profile',
       beforeEnter: (to, from) => {

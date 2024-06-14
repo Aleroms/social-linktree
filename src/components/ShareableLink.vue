@@ -1,6 +1,6 @@
 <template>
   <div class="sharable-link-container">
-    <img width="70" :src="data.imageUrl" :alt="data.name" />
+    <img width="70" :src="data.imageUrl" :alt="data.name" v-if="data.imageUrl" />
     <h1>{{ data.name }}</h1>
     <h2>{{ data.location }}</h2>
     <p>"{{ data.quote }}"</p>
@@ -17,7 +17,6 @@ defineProps({
     required: true
   }
 })
-
 </script>
 
 <style scoped>

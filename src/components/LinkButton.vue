@@ -6,8 +6,6 @@
 
 <script setup lang="ts">
 function redirectToLink(link: string) {
-  //todo: redirect to actual link
-  alert(link)
   if (link !== undefined) {
     window.open(link, '_blank')
   }
